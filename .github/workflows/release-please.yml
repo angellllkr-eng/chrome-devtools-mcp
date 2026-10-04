@@ -1,10 +1,14 @@
+name: release-please
+
 on:
   push:
     branches:
       - main
 
-permissions: read-all
-name: release-please
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
 
 jobs:
   release-please:
@@ -12,7 +16,7 @@ jobs:
     steps:
       - uses: googleapis/release-please-action@v5
         with:
-          token: ${{ secrets.BROWSER_AUTOMATION_BOT_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           target-branch: main
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
